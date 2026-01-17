@@ -107,22 +107,16 @@
       <div class="diagram-card">
         <h3>3. Value Distribution (Pie Chart)</h3>
         <div class="diagram-content">
-          <div class="pie-chart-container">
-            <svg class="pie-chart" viewBox="0 0 100 100" *ngIf="stats.sum > 0">
-              <circle class="pie-background" cx="50" cy="50" r="40"></circle>
-              <circle
-                *ngFor="let val of values; let i = index"
-                class="pie-slice"
-                cx="50"
-                cy="50"
-                r="40"
-                [style.--start-angle]="getStartAngle(i) + 'deg'"
-                [style.--percentage]="(val / stats.sum) * 100 + '%'"
-                [style.stroke]="getPieColor(i)"
-                [style.opacity]="val > 0 ? 1 : 0.2"
-              ></circle>
+          <div class="pie-chart-container" *ngIf="stats.sum > 0">
+            <svg class="pie-chart" viewBox="0 0 120 120">
+              <path *ngFor="let val of values; let i = index"
+                    [attr.d]="getPieSlicePath(i)"
+                    [attr.fill]="getPieColor(i)"
+                    [style.opacity]="val > 0 ? 1 : 0.3"
+                    class="pie-slice">
+              </path>
             </svg>
-            <div class="pie-center" *ngIf="stats.sum > 0">{{ stats.sum }}</div>
+            <div class="pie-center">{{ stats.sum }}</div>
           </div>
           <div class="pie-legend">
             <div class="legend-item" *ngFor="let val of values; let i = index" [class.zero-value]="val === 0">

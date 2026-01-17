@@ -103,4 +103,37 @@ export class Page2 implements OnInit {
     const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b'];
     return colors[index % colors.length];
   }
+
+  getPieSlicePath(index: number): string {
+    const radius = 50;
+    const centerX = 60;
+    const centerY = 60;
+    
+    let startAngle = 0;
+    for (let i = 0; i < index; i++) {
+      const percentage = this.stats.sum > 0 ? (this.values[i] / this.stats.sum) : 0;
+      startAngle += percentage * 360;
+    }
+    
+    const percentage = this.stats.sum > 0 ? (this.values[index] / this.stats.sum) : 0;
+    const sliceAngle = percentage * 360;
+    const endAngle = startAngle + sliceAngle;
+    
+    // Convert to radians
+    const startRad = (startAngle - 90) * Math.PI / 180;
+    const endRad = (endAngle - 90) * Math.PI / 180;
+    
+    // Calculate arc points
+    const x1 = centerX + radius * Math.cos(startRad);
+    const y1 = centerY + radius * Math.sin(startRad);
+    const x2 = centerX + radius * Math.cos(endRad);
+    const y2 = centerY + radius * Math.sin(endRad);
+    
+    // Determine if large arc
+    const largeArc = sliceAngle > 180 ? 1 : 0;
+    
+    // Build SVG arc path
+    const pathData = `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+    return pathData;
+  }
 }
