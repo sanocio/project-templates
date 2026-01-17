@@ -1,0 +1,235 @@
+<div class="page-container">
+  <div class="header-section">
+    <h1>📊 Statistical Analysis</h1>
+    <p>Enter 6 values to analyze statistics and view diagrams (0 values are excluded)</p>
+    <p>This is an only show page for statistical analysis. The input values are changeable and for show only. In real applications, these values would be fetched from a data source.</p>
+  </div>
+
+  <div class="input-section">
+    <h2>Input Values</h2>
+    <div class="input-grid">
+      <div class="input-field" *ngFor="let i of [0, 1, 2, 3, 4, 5]">
+        <label for="value-{{ i }}">Value {{ i + 1 }}</label>
+        <input
+          type="number"
+          id="value-{{ i }}"
+          [(ngModel)]="values[i]"
+          (change)="onValueChange()"
+          placeholder="Enter number"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="statistics-section">
+    <h2>Basic Statistics (9 Diagrams)</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Count</div>
+        <div class="stat-value">{{ stats.count }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Sum</div>
+        <div class="stat-value">{{ stats.sum }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Average</div>
+        <div class="stat-value">{{ stats.average }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Median</div>
+        <div class="stat-value">{{ stats.median }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Mode</div>
+        <div class="stat-value">{{ stats.mode }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Min</div>
+        <div class="stat-value">{{ stats.min }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Max</div>
+        <div class="stat-value">{{ stats.max }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Range</div>
+        <div class="stat-value">{{ stats.range }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Variance</div>
+        <div class="stat-value">{{ stats.variance }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Std Dev</div>
+        <div class="stat-value">{{ stats.stdDev }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="diagrams-section">
+    <h2>Data Visualizations</h2>
+    <div class="diagrams-grid">
+      <!-- Diagram 1: Bar Chart -->
+      <div class="diagram-card">
+        <h3>1. Values Bar Chart</h3>
+        <div class="diagram-content">
+          <div class="bar-chart">
+            <div class="bar-item" *ngFor="let val of values; let i = index">
+              <div class="bar-label">V{{ i + 1 }}</div>
+              <div class="bar-container">
+                <div
+                  class="bar"
+                  [style.height.%]="stats.max > 0 ? (val / stats.max) * 100 : 0"
+                  [title]="val"
+                ></div>
+              </div>
+              <div class="bar-value">{{ val }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagram 2: Distribution -->
+      <div class="diagram-card">
+        <h3>2. Frequency Distribution</h3>
+        <div class="diagram-content">
+          <div class="distribution-chart">
+            <div *ngFor="let val of stats.sortedValues" class="dist-item">
+              <span class="dist-val">{{ val }}</span>
+              <div class="dist-bar" [style.width.%]="(val / (stats.max || 1)) * 100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagram 3: Pie Chart -->
+      <div class="diagram-card">
+        <h3>3. Value Distribution (Pie Chart)</h3>
+        <div class="diagram-content">
+          <div class="pie-chart-container">
+            <svg class="pie-chart" viewBox="0 0 100 100" *ngIf="stats.sum > 0">
+              <circle class="pie-background" cx="50" cy="50" r="40"></circle>
+              <circle
+                *ngFor="let val of values; let i = index"
+                class="pie-slice"
+                cx="50"
+                cy="50"
+                r="40"
+                [style.--start-angle]="getStartAngle(i) + 'deg'"
+                [style.--percentage]="(val / stats.sum) * 100 + '%'"
+                [style.stroke]="getPieColor(i)"
+                [style.opacity]="val > 0 ? 1 : 0.2"
+              ></circle>
+            </svg>
+            <div class="pie-center" *ngIf="stats.sum > 0">{{ stats.sum }}</div>
+          </div>
+          <div class="pie-legend">
+            <div class="legend-item" *ngFor="let val of values; let i = index" [class.zero-value]="val === 0">
+              <span class="legend-color" [style.background-color]="getPieColor(i)"></span>
+              <span class="legend-text">V{{ i + 1 }}: {{ val }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagram 4: Average Line -->
+      <div class="diagram-card">
+        <h3>4. Average Position</h3>
+        <div class="diagram-content">
+          <div class="average-diagram">
+            <div class="avg-background-bar"></div>
+            <div class="avg-line" [style.left.%]="stats.max > 0 ? (stats.average / stats.max) * 100 : 0">
+              <div class="avg-label">Avg: {{ stats.average }}</div>
+            </div>
+            <div class="avg-scale">
+              <span>0</span>
+              <span>{{ (stats.max / 2) | number: '1.0-0' }}</span>
+              <span>{{ stats.max }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagram 5: Data Spread -->
+      <div class="diagram-card">
+        <h3>5. Data Spread (Variance)</h3>
+        <div class="diagram-content">
+          <div class="spread-diagram">
+            <div class="spread-info">
+              <div class="spread-item">
+                <span>Variance:</span>
+                <span class="spread-value">{{ stats.variance }}</span>
+              </div>
+              <div class="spread-item">
+                <span>Std Dev:</span>
+                <span class="spread-value">{{ stats.stdDev }}</span>
+              </div>
+              <div class="spread-visual">
+                <div class="spread-bar" [style.width.%]="Math.min((stats.variance / 10) * 100, 100)"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagram 6: Median Indicator -->
+      <div class="diagram-card">
+        <h3>6. Median Value</h3>
+        <div class="diagram-content">
+          <div class="median-diagram">
+            <div class="median-value">{{ stats.median }}</div>
+            <div class="median-background-bar"></div>
+            <div class="median-line" [style.left.%]="stats.max > 0 ? (stats.median / stats.max) * 100 : 0"></div>
+            <div class="median-scale">
+              <span>{{ stats.min }}</span>
+              <span>{{ (stats.min + (stats.max - stats.min) / 2) | number: '1.0-0' }}</span>
+              <span>{{ stats.max }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagram 7: Sum Total -->
+      <div class="diagram-card">
+        <h3>7. Sum Total</h3>
+        <div class="diagram-content">
+          <div class="sum-diagram">
+            <div class="sum-value">{{ stats.sum }}</div>
+            <div class="sum-label">Total of all values</div>
+            <div class="sum-breakdown">
+              <div *ngFor="let val of values" class="sum-item" [style.width.%]="stats.sum > 0 ? (val / stats.sum) * 100 : 0"
+                   [title]="val"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagram 8: Value Count -->
+      <div class="diagram-card">
+        <h3>8. Valid Values Count</h3>
+        <div class="diagram-content">
+          <div class="count-diagram">
+            <div class="count-circle">{{ stats.count }}</div>
+            <div class="count-label">Values (excluding zeros)</div>
+            <div class="count-info">Total inputs: {{ values.length }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagram 9: Mode Frequency -->
+      <div class="diagram-card">
+        <h3>9. Most Frequent Value (Mode)</h3>
+        <div class="diagram-content">
+          <div class="mode-diagram">
+            <div class="mode-value">{{ stats.mode }}</div>
+            <div class="mode-label">Most Frequent Value</div>
+            <div class="mode-visual">
+              <div *ngFor="let val of values" class="mode-dot" [class.highlight]="val === stats.mode"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

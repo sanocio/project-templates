@@ -1,0 +1,122 @@
+<div class="page-container">
+  <div class="hero">
+    <h1>{{ t.heroTitle }}</h1>
+    <p>{{ t.heroSubtitle }}</p>
+  </div>
+
+  <div class="section">
+    <h2>{{ t.aboutTitle }}</h2>
+    <p>{{ t.aboutText }}</p>
+  </div>
+
+  <div class="section">
+    <h2>{{ t.whatWeDoTitle }}</h2>
+    <p style="margin-bottom: 1rem;">{{ t.whatWeDoTitle }}:</p>
+    <ul style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+      <li><strong>{{ t.cloudSolutions }}</strong></li>
+      <li><strong>{{ t.aiMl }}</strong></li>
+      <li><strong>{{ t.enterpriseSoftware }}</strong></li>
+      <li><strong>{{ t.digitalTransformation }}</strong></li>
+      <li><strong>{{ t.consultingServices }}</strong></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>{{ t.leadershipTitle }}</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">👨‍💼</div>
+        <h3>{{ t.james }}</h3>
+        <p class="role">{{ t.ceo }}</p>
+        <p>{{ t.jamesDesc }}</p>
+      </div>
+      <div class="team-card">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">👩‍💼</div>
+        <h3>{{ t.sarah }}</h3>
+        <p class="role">{{ t.cto }}</p>
+        <p>{{ t.sarahDesc }}</p>
+      </div>
+      <div class="team-card">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">👨‍💻</div>
+        <h3>{{ t.michael }}</h3>
+        <p class="role">{{ t.vp }}</p>
+        <p>{{ t.michaelDesc }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background: #f0f4ff; padding: 2rem; border-radius: 12px;">
+    <h2 style="border-bottom: none; color: #667eea; margin-bottom: 2rem;">{{ t.requestOfferTitle }}</h2>
+    
+    <div class="cta-section">
+      <div class="contact-info">
+        <h3>📋 {{ t.companyInfo }}</h3>
+        
+        <div class="info-item">
+          <div class="info-label">{{ t.address }}</div>
+          <div class="info-value">
+            1250 Innovation Drive<br>
+            San Francisco, CA 94105<br>
+            United States
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">{{ t.email }}</div>
+          <div class="info-value">
+            <a href="mailto:business@techvision.com" style="color: white; text-decoration: none;">business@techvision.com</a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">{{ t.telephone }}</div>
+          <div class="info-value">
+            <a href="tel:+14155550101" style="color: white; text-decoration: none;">+1 (415) 555-0101</a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">{{ t.vatNumber }}</div>
+          <div class="info-value">
+            EU2024567890
+          </div>
+        </div>
+      </div>
+
+      <div class="request-form">
+        <h3>📧 {{ t.requestFormTitle }}</h3>
+        
+        <form>
+          <div class="form-group">
+            <label for="email">{{ t.yourEmail }} *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="your.email@company.com"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="request">{{ t.yourRequest }} *</label>
+            <textarea 
+              id="request" 
+              name="request" 
+              [placeholder]="t.requestPlaceholder"
+              maxlength="5000"
+              required
+            ></textarea>
+            <div class="char-count">
+              <span id="charCount">0</span> / 5000 {{ t.characters }}
+            </div>
+          </div>
+
+          <button type="button" class="submit-btn" disabled title="Submit functionality coming soon">
+            {{ t.sendRequest }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

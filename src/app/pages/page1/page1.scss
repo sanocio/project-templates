@@ -1,0 +1,256 @@
+.page-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+
+  h1 {
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+  }
+
+  p {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+}
+
+.section {
+  margin-bottom: 2.5rem;
+
+  h2 {
+    font-size: 2rem;
+    color: #333;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  ul {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      strong {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.team-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+  }
+
+  h3 {
+    color: #667eea;
+    font-size: 1.4rem;
+    margin: 1rem 0 0.5rem 0;
+  }
+
+  .role {
+    color: #764ba2;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.contact-card {
+  background: #f8f9fa;
+  border-left: 4px solid #667eea;
+  padding: 1.5rem;
+  border-radius: 8px;
+
+  h3 {
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+
+  strong {
+    color: #667eea;
+  }
+}
+
+.cta-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+  margin-top: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.contact-info {
+  h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    color: white;
+
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.info-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.info-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-bottom: 0.3rem;
+}
+
+.info-value {
+  font-size: 1.1rem;
+  word-break: break-word;
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.request-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  h3 {
+    color: #667eea;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+
+.char-count {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 0.3rem;
+  text-align: right;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: not-allowed;
+  width: 100%;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}

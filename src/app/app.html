@@ -1,0 +1,77 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<div class="container">
+  <header>
+    <div class="header-content">
+      <h1>Angular Routing Demo</h1>
+      <p>Click any button to navigate to different pages</p>
+    </div>
+  </header>
+
+  <nav class="button-grid">
+    <button 
+      (click)="setPage(0)" 
+      [class.active]="currentPage() === 0"
+      title="Home"
+    >Default</button>
+    <button 
+      (click)="setPage(1)" 
+      [class.active]="currentPage() === 1"
+      title="Informational"
+    >Informational</button>
+    <button 
+      (click)="setPage(2)" 
+      [class.active]="currentPage() === 2"
+      title="Statistical Analysis"
+    >Statistical Analysis</button>
+    <button 
+      (click)="setPage(3)" 
+      [class.active]="currentPage() === 3"
+      title="TBC"
+    >TBC</button>
+    <button 
+      (click)="setPage(4)" 
+      [class.active]="currentPage() === 4"
+      title="TBC"
+    >TBC</button>
+    <button 
+      (click)="setPage(5)" 
+      [class.active]="currentPage() === 5"
+      title="TBC"
+    >TBC</button>
+    <button 
+      (click)="setPage(6)" 
+      [class.active]="currentPage() === 6"
+      title="TBC"
+    >TBC</button>
+    <button 
+      (click)="setPage(7)" 
+      [class.active]="currentPage() === 7"
+      title="TBC"
+    >TBC</button>
+    <button 
+      (click)="setPage(8)" 
+      [class.active]="currentPage() === 8"
+      title="TBC"
+    >TBC</button>
+  </nav>
+
+  <main class="content">
+    <app-index *ngIf="currentPage() === 0"></app-index>
+    <app-page1 *ngIf="currentPage() === 1"></app-page1>
+    <app-page2 *ngIf="currentPage() === 2"></app-page2>
+    <app-page3 *ngIf="currentPage() === 3"></app-page3>
+    <app-page4 *ngIf="currentPage() === 4"></app-page4>
+    <app-page5 *ngIf="currentPage() === 5"></app-page5>
+    <app-page6 *ngIf="currentPage() === 6"></app-page6>
+    <app-page7 *ngIf="currentPage() === 7"></app-page7>
+    <app-page8 *ngIf="currentPage() === 8"></app-page8>
+  </main>
+</div>
