@@ -1,17 +1,12 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <div class="container">
   <header>
+    <div class="language-selector">
+      <button class="lang-btn" title="Hungarian" (click)="setLanguage('hu')">🇭🇺</button>
+      <button class="lang-btn" title="English" (click)="setLanguage('en')">🇬🇧</button>
+    </div>
     <div class="header-content">
-      <h1>Angular Routing Demo</h1>
-      <p>Click any button to navigate to different pages</p>
+      <h1>{{ getTranslation('title') }}</h1>
+      <p>{{getTranslation('description')}}</p>
     </div>
   </header>
 
@@ -20,7 +15,7 @@
       (click)="setPage(0)" 
       [class.active]="currentPage() === 0"
       title="Home"
-    >Default</button>
+    >{{getTranslation('us')}}</button>
     <button 
       (click)="setPage(1)" 
       [class.active]="currentPage() === 1"
